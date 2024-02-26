@@ -104,21 +104,26 @@ DataRow recentUserDataRow(
                       child: Text(snapshot.data.docs[index]['typeCoins']),
                     ),
                     content: Container(
-                      height: 120,
+                      height: 140,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(snapshot.data.docs[index]['withdrawal']),
+                          Text("    المبلغ الذي يريد سحبه :  ${snapshot.data.docs[index]['withdrawal']}",style: TextStyle(color: Colors.blueAccent,fontWeight: FontWeight.bold),),
+
+                        Divider(),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Icon(Icons.phone),
-                              Text(snapshot.data.docs[index]['phone']),
+                              Text(" رقم الموبيل :  ${snapshot.data.docs[index]['phone']}"),
                             ],
                           ),
                           const SizedBox(
                             height: 10,
                           ),
+                          Divider(),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -158,7 +163,7 @@ DataRow recentUserDataRow(
         ),
       )),
       DataCell(Text(
-        snapshot.data.docs[index]['withdrawal'],
+        snapshot.data.docs[index]['withdrawal'].toString(),
         style: TextStyle(color: Colors.white, fontSize: 12),
       )),
       DataCell(Row(

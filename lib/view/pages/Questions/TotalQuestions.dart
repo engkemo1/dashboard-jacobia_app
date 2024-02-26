@@ -36,7 +36,8 @@ class _QuestionsState extends State<Questions> {
   String? corAns;
   String? category;
 
-  bool truefalse = false;
+  bool truefalse = truegit ;
+
   var controller = Get.put(QustionGetX());
   var quizGetx = Get.put(QuizGetX());
 
@@ -128,11 +129,12 @@ class _QuestionsState extends State<Questions> {
                                             showDialog(
                                                 context: context,
                                                 builder: (_) {
-if(snapshot.data.docs[index]
-['type'] =="options")
-                                                  corAns = snapshot.data.docs[index]
-                                                  ['answer']
-                                                  ;
+                                                  if(snapshot.data.docs[index]
+                                                  ['type'] =="options") {
+                                                    corAns = snapshot.data.docs[index]
+                                                    ['answer']
+                                                    ;
+                                                  }
                                                   return AlertDialog(
                                                       backgroundColor: appBarColor,
                                                       content: SingleChildScrollView(
