@@ -58,7 +58,7 @@ indicatorColor: Colors.greenAccent,
           ),
           title: Row(
             children: [
-              Text('Jacobia',style: TextStyle(   shadows: <Shadow>[
+              Text('Jacobia',style: TextStyle(   shadows: const <Shadow>[
 
                 Shadow(
                   blurRadius: 30.0,
@@ -68,7 +68,8 @@ indicatorColor: Colors.greenAccent,
 
               ],color: Colors.greenAccent.shade100),),
 
-              Text(' Dashboard',style: TextStyle(
+              const Text(' Dashboard',style: TextStyle(
+                fontSize: 14,
                 color: Colors.greenAccent,
                 shadows: <Shadow>[
 

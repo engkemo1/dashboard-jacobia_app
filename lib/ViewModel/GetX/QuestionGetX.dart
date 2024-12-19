@@ -11,8 +11,8 @@ class QustionGetX extends GetxController {
   int type=0;
   String question = "",category="";
   String option1 = "", option2 = "", option3 = "", option4 = "", option5 = "";
-  String? answer;
-  bool answertf=true;
+  int? answer;
+  int? answertf;
   bool isLoading = false;
   List<Options>? optionsModel ;
 

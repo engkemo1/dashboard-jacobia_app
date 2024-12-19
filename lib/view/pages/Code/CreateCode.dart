@@ -40,7 +40,7 @@ class _CreateCodeState extends State<CreateCode> {
                     Get.to(Codes());
                   },
                   child: Text(' View all codes'),
-                  style: ElevatedButton.styleFrom(primary: appBarColor),
+                  style: ElevatedButton.styleFrom(backgroundColor: appBarColor),
                 ),
                 IconButton(
                     onPressed: () {},
@@ -154,7 +154,7 @@ class _CreateCodeState extends State<CreateCode> {
                         }
                       },
                       child: Text('Save'),
-                      style: ElevatedButton.styleFrom(primary: appBarColor),
+                      style: ElevatedButton.styleFrom(backgroundColor: appBarColor),
                     )
                   ],
                 ),

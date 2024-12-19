@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dashboard/view/pages/HomeScreen.dart';
 import 'package:dashboard/view/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../local.dart';
@@ -28,6 +29,7 @@ class AuthController extends GetxController {
         }else
           {
             Get.snackbar(
+              backgroundColor: Colors.white,
               'Error Logging in',
               'email or password is incorrect',
             );
@@ -35,12 +37,16 @@ class AuthController extends GetxController {
 
       } else {
         Get.snackbar(
+          backgroundColor: Colors.white,
+
           'Error Logging in',
           'Please enter all the fields',
         );
       }
     } catch (e) {
       Get.snackbar(
+        backgroundColor: Colors.white,
+
         'Error Loggin gin',
         e.toString(),
       );

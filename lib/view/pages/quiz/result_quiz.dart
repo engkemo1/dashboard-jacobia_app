@@ -90,7 +90,7 @@ class _ResultQuizState extends State<ResultQuiz> {
                                           size: 14,
                                         ),
                                         style: ElevatedButton.styleFrom(
-                                            primary: Colors.red),
+                                            backgroundColor: Colors.red),
                                         onPressed: () {
                                           Get.back();
                                         },
@@ -104,7 +104,7 @@ class _ResultQuizState extends State<ResultQuiz> {
                                           size: 14,
                                         ),
                                         style: ElevatedButton.styleFrom(
-                                            primary: Colors.red),
+                                            backgroundColor: Colors.red),
                                         onPressed: () {
                                           firestore
                                               .collection('quiz')
@@ -220,8 +220,7 @@ class _ResultQuizState extends State<ResultQuiz> {
                                                 ),
                                                 style: ElevatedButton
                                                     .styleFrom(
-                                                    primary:
-                                                    Colors.red),
+                                                    backgroundColor: Colors.red),
                                                 onPressed: () {
                                                   // firestore
                                                   //     .collection(widget
@@ -247,7 +246,7 @@ class _ResultQuizState extends State<ResultQuiz> {
                                                 ),
                                                 style: ElevatedButton
                                                     .styleFrom(
-                                                    primary: Colors
+                                                    backgroundColor: Colors
                                                         .greenAccent),
                                                 onPressed: () {
                                                   var coin = widget

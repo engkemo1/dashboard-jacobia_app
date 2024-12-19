@@ -45,7 +45,8 @@ class Users extends StatelessWidget {
                               child: SizedBox(
                                 width: double.infinity,
                                 child: DataTable(
-                                  horizontalMargin: 1,columnSpacing: 1,
+                                  horizontalMargin: 1,
+                                  columnSpacing: 1,
                                   columns: const [
                                     DataColumn(
                                       label: Text(
@@ -206,7 +207,7 @@ DataRow recentUserDataRow(
                                                       ),
                                                       style: ElevatedButton
                                                           .styleFrom(
-                                                              primary:
+                                                              backgroundColor:
                                                                   Colors.red),
                                                       onPressed: () {
                                                         Get.back();
@@ -222,12 +223,22 @@ DataRow recentUserDataRow(
                                                       ),
                                                       style: ElevatedButton
                                                           .styleFrom(
-                                                              primary:
+                                                              backgroundColor:
                                                                   Colors.red),
-                                                      onPressed: () {
-                                                        UsersGetx().removeUser(
-                                                            snapshot
-                                                                .data.docs.id);
+                                                      onPressed: () async {
+                                                        print(snapshot
+                                                            .data
+                                                            .docs[index]
+                                                            .id); // Debugging: Check ID
+                                                        await firestore
+                                                            .collection('users')
+                                                            .doc(snapshot.data
+                                                                .docs[index].id)
+                                                            .delete()
+                                                            .then((v) {
+                                                          Get.back();
+                                                          Get.back();
+                                                        });
                                                       },
                                                       label:
                                                           const Text("Delete"))

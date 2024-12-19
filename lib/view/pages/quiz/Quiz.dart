@@ -20,7 +20,6 @@ class _QuizState extends State<Quiz> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-      
           actions: [
             Container(
               height: 35,
@@ -46,7 +45,10 @@ class _QuizState extends State<Quiz> {
               ),
             )
           ],
-          title: const Text('Quiz',style: TextStyle(color: Colors.white),),
+          title: const Text(
+            'Quiz',
+            style: TextStyle(color: Colors.white),
+          ),
           backgroundColor: Colors.greenAccent,
           elevation: 0,
         ),
@@ -75,10 +77,13 @@ class _QuizState extends State<Quiz> {
                                     child: Image.network(
                                       snapshot.data.docs[index]['imageUrl'],
                                       fit: BoxFit.fill,
+                                      errorBuilder: (context, err, s) =>
+                                          Image.asset(
+                                              "assets/images/placeholder.jpg"),
                                     )),
                                 title: Text(
                                   snapshot.data.docs[index]['name'],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 20, color: Colors.white),
                                 ),
                                 subtitle: Text(
@@ -88,7 +93,9 @@ class _QuizState extends State<Quiz> {
                                 ),
                                 trailing: IconButton(
                                   onPressed: () {
-      Get.to(ResultQuiz(data: snapshot.data.docs[index],));
+                                    Get.to(ResultQuiz(
+                                      data: snapshot.data.docs[index],
+                                    ));
                                   },
                                   icon: const Icon(
                                     Icons.arrow_forward_ios_outlined,
@@ -96,7 +103,7 @@ class _QuizState extends State<Quiz> {
                                   ),
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 color: Colors.white,
                               )
                             ],

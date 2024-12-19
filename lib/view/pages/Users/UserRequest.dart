@@ -29,7 +29,7 @@ class UsersRequest extends StatelessWidget {
                         children: [
                           Text(
                             "Recent Users",
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           SingleChildScrollView(
                             child: SizedBox(
@@ -133,7 +133,7 @@ DataRow recentUserDataRow(
                                     size: 14,
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.red),
+                                      backgroundColor: Colors.red),
                                   onPressed: () {
                                     Get.back();
                                   },
@@ -147,7 +147,7 @@ DataRow recentUserDataRow(
                                     size: 14,
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.red),
+                                      backgroundColor: Colors.red),
                                   onPressed: () {},
                                   label: const Text("chat"))
                             ],

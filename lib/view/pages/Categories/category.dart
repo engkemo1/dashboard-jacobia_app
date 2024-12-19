@@ -56,7 +56,8 @@ class _CategoryState extends State<Category> {
 
   int value = 0;
   List<String> optionList = [];
-  String? corAns;
+  int? corAns;
+  String? answer;
   String? category;
 
   bool truefalse = false;
@@ -408,12 +409,20 @@ class _CategoryState extends State<Category> {
                                                                   Colors
                                                                       .black,
                                                                   value:
-                                                                  corAns,
+                                                                  answer,
                                                                   onChanged:
                                                                       (String?
                                                                   newValue) {
-                                                                    corAns =
-                                                                    newValue!;
+                                                                        corAns = newValue == "A"
+                                                                            ? 0
+                                                                            : newValue == 'B'
+                                                                            ? 1
+                                                                            : newValue == "C"
+                                                                            ? 2
+                                                                            : newValue == "D"
+                                                                            ? 3
+                                                                            : 4;
+
                                                                   },
                                                                   items: [
                                                                     'A',
@@ -550,7 +559,7 @@ class _CategoryState extends State<Category> {
                                                                     category!;
                                                                     controller
                                                                         .answertf =
-                                                                        truefalse;
+                                                                        truefalse==true?1:0;
 
                                                                     controller
                                                                         .option1 =
@@ -690,8 +699,7 @@ class _CategoryState extends State<Category> {
                                                                   ),
                                                                   style: ElevatedButton
                                                                       .styleFrom(
-                                                                      primary:
-                                                                      Colors
+                                                                      backgroundColor: Colors
                                                                           .red),
                                                                   onPressed: () {
                                                                     Navigator.pop(
@@ -709,8 +717,7 @@ class _CategoryState extends State<Category> {
                                                                   ),
                                                                   style: ElevatedButton
                                                                       .styleFrom(
-                                                                      primary:
-                                                                      Colors
+                                                                      backgroundColor: Colors
                                                                           .red),
                                                                   onPressed: () {
                                                                     firestore

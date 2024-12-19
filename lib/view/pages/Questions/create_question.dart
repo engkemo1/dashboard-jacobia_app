@@ -29,18 +29,21 @@ class _CreateQuestionState extends State<CreateQuestion> {
 
   int index = 0;
 
-  String? corAns;
+  int? corAns;
 
   bool truefalse = false;
   var controller = Get.put(QustionGetX());
   var quizGetx = Get.put(QuizGetX());
-  List<Options>optionsList=[];
-  List<String>categoryList=[];
+  List<Options> optionsList = [];
+  List<String> categoryList = [];
 
   String? category;
+
+  int? answer;
+
   void initState() {
     var fire =
-    FirebaseFirestore.instance.collection('category').get().then((value) {
+        FirebaseFirestore.instance.collection('category').get().then((value) {
       value.docs.forEach((element) {
         categoryList.add(element["name"]);
       });
@@ -52,10 +55,13 @@ class _CreateQuestionState extends State<CreateQuestion> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('Add Question'),centerTitle: true,backgroundColor: Colors.greenAccent,),
+        appBar: AppBar(
+          title: Text('Add Question'),
+          centerTitle: true,
+          backgroundColor: Colors.greenAccent,
+        ),
         body: Container(
           padding: EdgeInsets.all(20),
           height: MediaQuery.of(context).size.height,
@@ -93,7 +99,8 @@ class _CreateQuestionState extends State<CreateQuestion> {
                           child: RadioListTile(
                             title: const Text(
                               'Options',
-                              style: TextStyle(color: Colors.white, fontSize: 15),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             ),
                             value: 0,
                             selectedTileColor: Colors.white,
@@ -110,13 +117,13 @@ class _CreateQuestionState extends State<CreateQuestion> {
                       Expanded(
                         flex: 1,
                         child: Theme(
-                          data: Theme.of(context)
-                              .copyWith(unselectedWidgetColor: Colors.greenAccent),
+                          data: Theme.of(context).copyWith(
+                              unselectedWidgetColor: Colors.greenAccent),
                           child: RadioListTile(
                             activeColor: Colors.greenAccent,
                             title: const Text('True/False',
-                                style:
-                                TextStyle(color: Colors.white, fontSize: 15)),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15)),
                             value: 1,
                             groupValue: index,
                             onChanged: (int? value) {
@@ -131,149 +138,161 @@ class _CreateQuestionState extends State<CreateQuestion> {
                   ),
                   index == 0
                       ? Container(
-                    child: Column(
-                      children: [
-                        InputField(
-                            controller: _option1,
-                            label: 'A',
-                            hint: 'Option',
-                            iconOrdrop: 'icon',
-                            isEnabled: true,
-                            texth: 15),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        InputField(
-                            controller: _option2,
-                            label: 'B',
-                            hint: 'Option',
-                            iconOrdrop: 'icon',
-                            isEnabled: true,
-                            texth: 15),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InputField(
-                            controller: _option3,
-                            label: 'C',
-                            hint: 'Option',
-                            iconOrdrop: 'icon',
-                            isEnabled: true,
-                            texth: 15),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InputField(
-                            controller: _option4,
-                            label: 'D',
-                            hint: 'Option',
-                            iconOrdrop: 'icon',
-                            isEnabled: true,
-                            texth: 15),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InputField(
-                            controller: _option5,
-                            label: 'E',
-                            hint: 'Option',
-                            iconOrdrop: 'icon',
-                            isEnabled: true,
-                            texth: 15),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        DropdownButtonFormField(
-                          elevation: 0,
-                          iconEnabledColor: Colors.white,
-                          style: TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                            hintText: 'Please Select Correct Answer',
-                            hintStyle: TextStyle(color: Colors.white),
-                            enabledBorder: OutlineInputBorder(
-                              //<-- SEE HERE
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              //<-- SEE HERE
-                              borderSide:
-                              BorderSide(color: Colors.white, width: 1),
-                            ),
-                            filled: true,
-                            fillColor: appBarColor,
-                          ),
-                          iconDisabledColor: Colors.white,
-                          dropdownColor: Colors.black,
-                          value: corAns,
-                          onChanged: (String? newValue) {
-                            corAns = newValue!;
-                          },
-                          items: ['A', 'B', 'C', 'D', 'E']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: TextStyle(fontSize: 20),
+                          child: Column(
+                            children: [
+                              InputField(
+                                  controller: _option1,
+                                  label: 'A',
+                                  hint: 'Option',
+                                  iconOrdrop: 'icon',
+                                  isEnabled: true,
+                                  texth: 15),
+                              const SizedBox(
+                                height: 10,
                               ),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                  )
+                              InputField(
+                                  controller: _option2,
+                                  label: 'B',
+                                  hint: 'Option',
+                                  iconOrdrop: 'icon',
+                                  isEnabled: true,
+                                  texth: 15),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              InputField(
+                                  controller: _option3,
+                                  label: 'C',
+                                  hint: 'Option',
+                                  iconOrdrop: 'icon',
+                                  isEnabled: true,
+                                  texth: 15),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              InputField(
+                                  controller: _option4,
+                                  label: 'D',
+                                  hint: 'Option',
+                                  iconOrdrop: 'icon',
+                                  isEnabled: true,
+                                  texth: 15),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              InputField(
+                                  controller: _option5,
+                                  label: 'E',
+                                  hint: 'Option',
+                                  iconOrdrop: 'icon',
+                                  isEnabled: true,
+                                  texth: 15),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              DropdownButtonFormField(
+                                elevation: 0,
+                                iconEnabledColor: Colors.white,
+                                style: TextStyle(color: Colors.white),
+                                decoration: const InputDecoration(
+                                  hintText: 'Please Select Correct Answer',
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: OutlineInputBorder(
+                                    //<-- SEE HERE
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    //<-- SEE HERE
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 1),
+                                  ),
+                                  filled: true,
+                                  fillColor: appBarColor,
+                                ),
+                                iconDisabledColor: Colors.white,
+                                dropdownColor: Colors.black,
+                                value: answer,
+                                onChanged: (dynamic newValue) {
+                                  corAns = newValue == "A"
+                                      ? 0
+                                      : newValue == 'B'
+                                          ? 1
+                                          : newValue == "C"
+                                              ? 2
+                                              : newValue == "D"
+                                                  ? 3
+                                                  : 4;
+                                },
+                                items: [
+                                  'A',
+                                  'B',
+                                  'C',
+                                  'D',
+                                  'E'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )
                       : Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Theme(
-                          data: Theme.of(context).copyWith(
-                            unselectedWidgetColor: Colors.greenAccent,
-                          ),
-                          child: RadioListTile(
-                            title: const Text(
-                              'True',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 15),
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Theme(
+                                data: Theme.of(context).copyWith(
+                                  unselectedWidgetColor: Colors.greenAccent,
+                                ),
+                                child: RadioListTile(
+                                  title: const Text(
+                                    'True',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15),
+                                  ),
+                                  value: true,
+                                  selectedTileColor: Colors.white,
+                                  activeColor: Colors.greenAccent,
+                                  groupValue: truefalse,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      truefalse = value!;
+                                    });
+                                  },
+                                ),
+                              ),
                             ),
-                            value: true,
-                            selectedTileColor: Colors.white,
-                            activeColor: Colors.greenAccent,
-                            groupValue: truefalse,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                truefalse = value!;
-                              });
-                            },
-                          ),
+                            Expanded(
+                              flex: 1,
+                              child: Theme(
+                                data: Theme.of(context).copyWith(
+                                    unselectedWidgetColor: Colors.greenAccent),
+                                child: RadioListTile(
+                                  activeColor: Colors.greenAccent,
+                                  title: const Text('False',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15)),
+                                  value: false,
+                                  groupValue: truefalse,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      truefalse = value!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Theme(
-                          data: Theme.of(context).copyWith(
-                              unselectedWidgetColor: Colors.greenAccent),
-                          child: RadioListTile(
-                            activeColor: Colors.greenAccent,
-                            title: const Text('False',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15)),
-                            value: false,
-                            groupValue: truefalse,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                truefalse = value!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   SizedBox(
                     height: 10,
                   ),
-      
                   SizedBox(
                     height: 10,
                   ),
@@ -302,65 +321,39 @@ class _CreateQuestionState extends State<CreateQuestion> {
                   ),
                   DropdownButtonFormField(
                     elevation: 0,
-                    iconEnabledColor:
-                    Colors.white,
-                    style: TextStyle(
-                        color:
-                        Colors.white),
-                    decoration:
-                    const InputDecoration(
-                      hintText:
-                      'Please Select Category',
-                      hintStyle: TextStyle(
-                          color: Colors
-                              .white),
-                      enabledBorder:
-                      OutlineInputBorder(
+                    iconEnabledColor: Colors.white,
+                    style: TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
+                      hintText: 'Please Select Category',
+                      hintStyle: TextStyle(color: Colors.white),
+                      enabledBorder: OutlineInputBorder(
                         //<-- SEE HERE
-                        borderSide: BorderSide(
-                            color: Colors
-                                .white),
+                        borderSide: BorderSide(color: Colors.white),
                       ),
-                      focusedBorder:
-                      OutlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         //<-- SEE HERE
-                        borderSide:
-                        BorderSide(
-                            color: Colors
-                                .white,
-                            width: 1),
+                        borderSide: BorderSide(color: Colors.white, width: 1),
                       ),
                       filled: true,
-                      fillColor:
-                      appBarColor,
+                      fillColor: appBarColor,
                     ),
-                    iconDisabledColor:
-                    Colors.white,
-                    dropdownColor:
-                    Colors.black,
+                    iconDisabledColor: Colors.white,
+                    dropdownColor: Colors.black,
                     value: category,
-                    onChanged: (String?
-                    newValue) {
-                      category =
-                      newValue!;
+                    onChanged: (String? newValue) {
+                      category = newValue!;
                     },
-                    items: categoryList.map<
-                        DropdownMenuItem<
-                            String>>((String
-                    value) {
-                      return DropdownMenuItem<
-                          String>(
+                    items: categoryList
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
                         value: value,
                         child: Text(
                           value,
-                          style: TextStyle(
-                              fontSize:
-                              20),
+                          style: TextStyle(fontSize: 20),
                         ),
                       );
                     }).toList(),
                   ),
-
                   SizedBox(
                     height: 30,
                   ),
@@ -368,24 +361,26 @@ class _CreateQuestionState extends State<CreateQuestion> {
                     width: 150,
                     child: ElevatedButton(
                       onPressed: () {
-                        if(_formKey.currentState!.validate()&&category!=null){
+                        if (_formKey.currentState!.validate() &&
+                            category != null) {
                           controller.answer = corAns;
-                          controller.answertf = truefalse;
+                          controller.answertf =                                                                         truefalse==true?1:0;
+
                           controller.option1 = _option1.text;
-                          controller.option2 = _option1.text;
-                          controller.option3 = _option1.text;
-                          controller.option4 = _option1.text;
-                          controller.option5 = _option1.text;
+                          controller.option2 = _option2.text;
+                          controller.option3 = _option3.text;
+                          controller.option4 = _option4.text;
+                          controller.option5 = _option5.text;
                           controller.type = index;
-                          controller.category=category!;
+                          controller.category = category!;
                           controller.question = _question.text;
-      
+
                           if (controller.type == 0) {
                             controller.postQOptions();
                           } else {
                             controller.postQTF();
                           }
-      
+
                           _option1.clear();
                           _option2.clear();
                           _option3.clear();
@@ -398,7 +393,7 @@ class _CreateQuestionState extends State<CreateQuestion> {
                       },
                       style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all(Colors.greenAccent)),
+                              MaterialStateProperty.all(Colors.greenAccent)),
                       child: const Text(
                         'Save',
                         style: TextStyle(color: Colors.white),
