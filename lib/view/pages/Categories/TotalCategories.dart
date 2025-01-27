@@ -176,8 +176,8 @@ class TotalCategories extends StatelessWidget {
                                       child: Image.network(
 
                                         snapshot.data.docs[index]['imageUrl'],
-                                        height: 150,
                                         fit: BoxFit.fill,
+                                        height: 150,
                                         errorBuilder: (context, l, S) {
                                           return Image.asset(
                                               "assets/images/placeholder.jpg",fit:  BoxFit.cover,height: 150,);
@@ -397,7 +397,7 @@ class TotalCategories extends StatelessWidget {
                           ),
                         ),
                       );
-                    }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),);
+                    }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.9),);
               }
             }),
       ),

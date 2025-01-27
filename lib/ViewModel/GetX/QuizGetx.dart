@@ -33,44 +33,51 @@ class QuizGetX extends GetxController {
 
   Future getRanks(String collection) async {
     List<int> ranks = [];
-var obj={};
-    await firestore.collection(collection).get().then((value) {
-      value.docs.forEach((element) {
-        ranks.add(element.get('correctAnswer'));
-      });
-      return ranks;
-    }).then((value) async{
+    var obj = {};
 
-      value.sort();
-  var rank=   value.getRange(value.length - 10, value.length).toList();
+    // Fetch documents from the collection
+    var snapshot = await firestore.collection(collection).get();
 
-  print(rank);
-      for(var i=0;i<=9;i++){
-      print(i);
-
-      await  firestore
-          .collection(collection)
-          .where("correctAnswer", isEqualTo: rank[i])
-          .get()
-          .then((value) => {
-
-        value.docs.forEach((element) {
-
-          obj[i]=[element.id,rank[i]];
-          print(obj);
-
-        })
-      });
-    }
-
-
+    // Extract the correctAnswer values and add them to the ranks list
+    snapshot.docs.forEach((element) {
+      ranks.add(element.get('correctAnswer'));
     });
 
+    // Check if there are any ranks
+    if (ranks.isEmpty) {
+      print('No ranks available');
+      Get.snackbar("", "No ranks available", backgroundColor: Colors.white);
+      return {};
+    }
+
+    // Sort ranks in descending order
+    ranks.sort((a, b) => b.compareTo(a)); // Sorting in descending order
+
+    // Determine the range based on the available ranks
+    int rangeStart = ranks.length >= 10 ? ranks.length - 10 : 0; // Start from 0 if less than 10
+    var rank = ranks.getRange(rangeStart, ranks.length).toList();
+    print(rank);
+
+    // Now retrieve the users with the corresponding ranks
+    for (var i = 0; i < rank.length; i++) {
+      print('Processing rank $i');
+
+      var rankValue = rank[i];
+      var rankUsers = await firestore
+          .collection(collection)
+          .where("correctAnswer", isEqualTo: rankValue)
+          .get();
+
+      rankUsers.docs.forEach((element) {
+        obj[i] = [element.id, rankValue];
+        print(obj);
+      });
+    }
 
     return obj;
   }
   Future getTotal(String doc)async{
-    int total=0;
+    double total=0;
    await firestore.collection('total').doc(doc).get().then((value) =>
        total=value.get('total')
 

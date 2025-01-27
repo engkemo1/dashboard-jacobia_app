@@ -24,7 +24,7 @@ class AuthController extends GetxController {
       if (email.isNotEmpty && password.isNotEmpty) {
         if(email =='jacobia@gmail.com'&&password=='jacobia123456'){
           CacheHelper.put(key:'user',value: 'exist');
-          Get.to(HomeScreen());
+          Get.to(const HomeScreen());
           update();
         }else
           {

@@ -78,7 +78,6 @@ class UsersRequest extends StatelessWidget {
   }
 }
 
-
 DataRow recentUserDataRow(
     int index, BuildContext context, AsyncSnapshot snapshot) {
   return DataRow(
@@ -109,21 +108,25 @@ DataRow recentUserDataRow(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text("    المبلغ الذي يريد سحبه :  ${snapshot.data.docs[index]['withdrawal']}",style: TextStyle(color: Colors.blueAccent,fontWeight: FontWeight.bold),),
-
-                        Divider(),
+                          Text(
+                            "    المبلغ الذي يريد سحبه :  ${snapshot.data.docs[index]['withdrawal']}",
+                            style: TextStyle(
+                                color: Colors.blueAccent,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Divider(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Icon(Icons.phone),
-                              Text(" رقم الموبيل :  ${snapshot.data.docs[index]['phone']}"),
+                              Text(
+                                  " رقم الموبيل :  ${snapshot.data.docs[index]['phone']}"),
                             ],
                           ),
                           const SizedBox(
                             height: 10,
                           ),
                           Divider(),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -165,11 +168,29 @@ DataRow recentUserDataRow(
       DataCell(Text(
         snapshot.data.docs[index]['withdrawal'].toString(),
         style: TextStyle(color: Colors.white, fontSize: 12),
-      )),
+      )), 
       DataCell(Row(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+
+              String key = snapshot.data.docs[index]['typeCoins'];
+              double currentCoins = snapshot.data.docs[index][key] ?? 0.0;
+              double withdrawal = snapshot.data.docs[index]['withdrawal'] ?? 0.0;
+
+              firestore
+                  .collection("users")
+                  .doc(snapshot.data.docs[index]['uid'])
+                  .update({
+                key: currentCoins - withdrawal,
+              })
+                  .then((value) {
+                UsersGetx().removeRequest(snapshot.data.docs[index].id);
+              })
+                  .catchError((error) {
+                print("Error updating user data: $error");
+              });
+            },
             child: const Text(
               'Accept',
               style: TextStyle(color: Colors.greenAccent, fontSize: 13),

@@ -443,6 +443,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                     hint: '\$',
                     iconOrdrop: 'icon',
                     isEnabled: true,
+
                     texth: 15),
                 const SizedBox(
                   height: 20,
@@ -589,7 +590,7 @@ Get.snackbar("Error"," Please select category");
       initialDate: DateTime.now(),
       currentDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime(2025),
+      lastDate: DateTime.now().add(Duration(days: 365)),
     );
     setState(() {
       if (selected != null) {

@@ -70,32 +70,25 @@ class _QuizState extends State<Quiz> {
                           child: Column(
                             children: [
                               ListTile(
-                                isThreeLine: true,
-                                style: ListTileStyle.drawer,
                                 leading: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      snapshot.data.docs[index]['imageUrl'],
-                                      fit: BoxFit.fill,
-                                      errorBuilder: (context, err, s) =>
-                                          Image.asset(
-                                              "assets/images/placeholder.jpg"),
-                                    )),
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    snapshot.data.docs[index].data()['imageUrl'],
+                                    fit: BoxFit.fill,
+                                    errorBuilder: (context, err, s) => Image.asset("assets/images/placeholder.jpg"),
+                                  ),
+                                ),
                                 title: Text(
-                                  snapshot.data.docs[index]['name'],
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white),
+                                  snapshot.data.docs[index].data()['name'],
+                                  style: const TextStyle(fontSize: 20, color: Colors.white),
                                 ),
                                 subtitle: Text(
-                                  snapshot.data.docs[index]['selected']
-                                      .toString(),
+                                  snapshot.data.docs[index].data()['selected'].toString(),
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 trailing: IconButton(
                                   onPressed: () {
-                                    Get.to(ResultQuiz(
-                                      data: snapshot.data.docs[index],
-                                    ));
+                                    Get.to(ResultQuiz(data: snapshot.data.docs[index]));
                                   },
                                   icon: const Icon(
                                     Icons.arrow_forward_ios_outlined,

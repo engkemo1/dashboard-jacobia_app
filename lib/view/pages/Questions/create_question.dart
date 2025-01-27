@@ -313,6 +313,7 @@ class _CreateQuestionState extends State<CreateQuestion> {
                       controller: _imageUrLController,
                       label: 'Image Url',
                       hint: 'Enter Image UrL',
+                      isValidate: false,
                       iconOrdrop: 'icon',
                       isEnabled: true,
                       texth: 15),
