@@ -119,13 +119,26 @@ DataRow recentUserDataRow(
                   title: const Center(
                     child: Text("Details"),
                   ),
-                  content: Column(
+                  content: ListView(
                     children: [
                       Divider(),
                       ListTile(
                           leading: const Text('Email'),
+                          trailing: SizedBox(
+                            width: 150,
+                            child: Center(
+                              child: Text(
+
+                                snapshot.data.docs[index]['email'] ?? '',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          )),
+                      Divider(),
+                      ListTile(
+                          leading: const Text('Created At'),
                           trailing: Text(
-                            snapshot.data.docs[index]['email'] ?? '',
+                            snapshot.data.docs[index]['createdAt'] ?? '',
                             style: TextStyle(fontSize: 12),
                           )),
                       Divider(),
